@@ -1,0 +1,25 @@
+- name: "Install App Node"
+  hosts: aula
+  become: yes
+  tasks: 
+    - name: Create a directory if it does not exist - Criar diretorio
+      file:
+        path: /usr/app
+        state: directory
+        mode: '0755'
+    - name: Linux - Instalando Unzip 
+      package:
+          name:
+            - unzip
+          state: present
+    - name: Unarchive a file that needs to be downloaded (added in 2.0) - Download e descompactar
+      unarchive:
+        src: https://github.com/bgsouza/app_node2/archive/master.zip
+        dest: /usr/app
+        remote_src: yes
+    - name: Install "coffee-script" node.js package - npm install.
+      npm:
+        name: coffee-script
+        path: usr/app
+    - name: Install pm2
+      npm: name=pm2 global=yes production=yes
