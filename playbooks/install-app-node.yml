@@ -17,9 +17,9 @@
         src: https://github.com/bgsouza/app_node2/archive/master.zip
         dest: /usr/app
         remote_src: yes
-    - name: Install "coffee-script" node.js package - npm install.
+    - name: Update packages based on package.json to their latest version.
       npm:
-        name: coffee-script
-        path: usr/app
+        path: /usr/app/app_node2-master
+        state: latest
     - name: Install pm2
       npm: name=pm2 global=yes production=yes
